@@ -1,5 +1,10 @@
 apiVersion: audit.k8s.io/v1
 kind: Policy
+{% if audit_policy_custom_omitstages is defined and audit_policy_custom_omitstages != "" %}
+omitStages:
+{{ audit_policy_custom_omitstages | indent(2, true) }}
+{% else %}
+{% endif %}
 rules:
 {% if audit_policy_custom_rules is defined and audit_policy_custom_rules != "" %}
 {{ audit_policy_custom_rules | indent(2, true) }}
